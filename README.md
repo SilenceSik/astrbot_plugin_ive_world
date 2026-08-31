@@ -2,7 +2,16 @@
 
 > **一个 AstrBot 插件**，通过分层提示词注入 + 上下文/响应清洗，降低 LLM 对话中的**软拒（soft refusal）与空回（empty response）**概率。
 
-> 📖 **想看原理而不是源码？** 请读姊妹项目 [rp-anti-refusal-playbook](https://github.com/SilenceSik/rp-anti-refusal-playbook)——完整的思路白皮书：为什么模型会拒绝/空回、攻击发生在哪个环节、每层机制针对什么、怎样在别的 Agent 框架复现。适合想移植到其他框架的开发者。
+---
+
+### 🔗 关联项目推荐 (Sister Projects)
+
+- 📖 **理论白皮书与跨框架移植指南**：[rp-anti-refusal-playbook](https://github.com/SilenceSik/rp-anti-refusal-playbook)
+  > 详细阐述「输入前置审核 vs 模型意愿 vs 输出后置审查」三段管线理论、注意力攻击原理、抗空回与抗截断机制，以及如何在 LangChain、One-API、SillyTavern 等其他框架中复现这套能力。
+- ⚙️ **工程实现（本项目）**：[astrbot_plugin_ive_world](https://github.com/SilenceSik/astrbot_plugin_ive_world)
+  > 基于 AstrBot 框架的具体工程落地，包含动态高熵混淆、双 Safe 块前后包裹抗截断、分层提示词调度与正则清洗流水线。
+
+---
 
 ## 简介
 
