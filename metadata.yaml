@@ -1,6 +1,6 @@
 name: astrbot_plugin_ive_world
 display_name: EV分层注入引擎
 author: sisi
-version: 0.10.0
-desc: 为 EV 提供分层提示词注入（世界观/增强/授权/记忆/构思/抗空回等）与上下文/响应清洗，降低空回与拒绝。
+version: 0.11.0
+desc: 为 EV 提供分层提示词注入（世界观/增强/授权/记忆/双Safe包裹抗截断等）与上下文/响应清洗。
 repo: https://github.com/local/astrbot_plugin_ive_world
