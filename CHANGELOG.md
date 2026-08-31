@@ -8,7 +8,6 @@
 - 📝 在 README 中新增「关闭 Gemini 深度思考」章节，明确建议对所有 Gemini 模型关闭 `reasoning: false`。
 - 📝 建议 Gemini 模型额外传参 `safety_settings: BLOCK_NONE`（透传取决于中转站）。
 - 📝 纠正「`content_filter` 是 Google 独有标签」的认知——排查时区分 Gemini 与国产模型。
-- 🛠️ 伊薇生产环境已实测关闭 11 个 Gemini 模型的 reasoning。
 
 ## v0.11.0 (2026-08-31)
 
@@ -76,7 +75,7 @@
 - **双 safe 并行**：输入端预制 8 个无害英文问题模板轮转注入，输出端要求模型末尾英文回答，两侧对用户不可见（上下文/响应清洗剥离）。原理=两个任务并行跑对冲浓度。
 - 模型分流细化：gemini 3.5/3.6/3.7/4 → full；3.1/3.0 → lite；deepseek/doubao → light；其他 → off。
 - 空回检测：响应长度 <5 记 warning，交给 AstrBot 自身 retry/fallback。
-- 空回根因研究：确认输入侧拦截（completion_tokens=0）为我们的空回形态；输出侧流式截断已排除（非流式）。
+- 空回根因研究：确认输入侧拦截（completion_tokens=0）为主要空回形态；输出侧流式截断已排除（非流式）。
 
 ---
 

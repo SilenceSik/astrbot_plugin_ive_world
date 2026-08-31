@@ -145,7 +145,7 @@ base = "".join(random.choice(charset) for _ in range(16))
 
 ## ⚠️ 强烈建议：关闭 Gemini 深度思考（reasoning），否则截断风险翻倍
 
-**实测发现（2026-08-31，Gemini 3.1 Pro / 3.5 flash 链路）：**
+**机制分析与实测发现：**
 
 - **Gemini 模型开启深度思考（reasoning）时，`reasoning_content` 思考链会把整套回复「预演」一遍**——包括双 Safe 包裹结构与完整角色正文。
 - 最终响应 = `reasoning_content`（草稿版正文）+ `content`（正式版正文），**同一份高浓度内容出现两次**。
