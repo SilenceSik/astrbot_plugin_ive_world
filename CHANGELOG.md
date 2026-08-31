@@ -1,5 +1,15 @@
 # 更新记录 (Changelog)
 
+## v0.11.1 (2026-08-31)
+
+**文档更新：关闭 Gemini 深度思考（reasoning）建议**：
+
+- ⚠️ **关键发现**：Gemini 开启深度思考（`reasoning`）时，`reasoning_content` 思考链会把整套回复（含双 Safe 包裹 + 完整角色正文）**预演一遍**，最终响应 = 草稿版 + 正式版，高浓度正文出现两次，`content_filter` 截断风险翻倍。
+- 📝 在 README 中新增「关闭 Gemini 深度思考」章节，明确建议对所有 Gemini 模型关闭 `reasoning: false`。
+- 📝 建议 Gemini 模型额外传参 `safety_settings: BLOCK_NONE`（透传取决于中转站）。
+- 📝 纠正「`content_filter` 是 Google 独有标签」的认知——排查时区分 Gemini 与国产模型。
+- 🛠️ 伊薇生产环境已实测关闭 11 个 Gemini 模型的 reasoning。
+
 ## v0.11.0 (2026-08-31)
 
 **重大认知重构与架构升级**：

@@ -143,6 +143,23 @@ base = "".join(random.choice(charset) for _ in range(16))
 3. **外审模型存在性**：无法从代码层面证实外审存在，抗空回层是无害兜底（不干扰正常请求）
 4. **`safety_settings` 透传不确定**：经中转访问时，请求参数能否透传到真实模型取决于中转站
 
+## ⚠️ 强烈建议：关闭 Gemini 深度思考（reasoning），否则截断风险翻倍
+
+**实测发现（2026-08-31，Gemini 3.1 Pro / 3.5 flash 链路）：**
+
+- **Gemini 模型开启深度思考（reasoning）时，`reasoning_content` 思考链会把整套回复「预演」一遍**——包括双 Safe 包裹结构与完整角色正文。
+- 最终响应 = `reasoning_content`（草稿版正文）+ `content`（正式版正文），**同一份高浓度内容出现两次**。
+- 后置审查（环节 C）扫描整个响应时，高浓度正文暴露面**翻倍**，`content_filter` 截断概率显著上升。
+- 且思考链中的草稿正文与正式正文措辞存在差异（两遍独立生成），即使正式正文安全，草稿也可能成为漏网之鱼。
+
+**对策：**
+
+1. **在模型配置中关闭 Gemini 的深度思考**（`reasoning: false`）。关闭后思考链不再预演正文，输出只含正式版一份，截断风险直接减半。
+   - AstrBot：Dashboard → 模型管理 → 该 Gemini 模型的 `reasoning` 设为 `false`。
+   - 建议对**所有** Gemini 模型统一关闭，而非仅关闭默认模型——fallback 链中的 Gemini 同样会触发。
+2. **Gemini 模型建议额外传参 `safety_settings: BLOCK_NONE`**：关闭 Google 独有内容安全过滤标签（`content_filter`）的最直接手段。透传是否生效取决于中转站是否支持，请自行验证。
+3. **`content_filter` 是 Google 独有标签**：若 `finish_reason` 出现 `content_filter`，只可能是 Gemini 上游或带 Google 审查的网关行为，**不会**是 DeepSeek 等国产模型——排查时不要把两者混为一谈。
+
 ## 免责声明
 
 - 本项目**仅实测了 Gemini 3.7 flash 与 DeepSeek V4 Pro 两个模型**
