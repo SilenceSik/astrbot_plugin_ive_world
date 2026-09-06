@@ -1,5 +1,5 @@
 """
-astrbot_plugin_ive_world — EV 分层注入引擎 v0.12.0
+astrbot_plugin_ive_world — EV 分层注入引擎 v0.13.0
 
 核心机制：
 1. 分层注入：world(世界观) + enhanced(增强行为) + nsfw(露骨授权) + safe(安全诱饵) + memory(记忆) + prefill + cot + identity + anti(抗空回·输出端高熵混淆) + induce(输出诱导) + obfuscate(字符混淆) + attn_guide(注意力引导)
